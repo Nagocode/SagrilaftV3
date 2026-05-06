@@ -1,0 +1,39 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String     @id @default(uuid())
+  razonSocial  String?
+  nombre       String?
+  email        String     @unique
+  correoAsesor String?
+  password     String
+  role         String     // "Cliente", "Proveedor", "Otro"
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  documents    Document[]
+}
+
+model Document {
+  id           String   @id @default(uuid())
+  type         String   // "Cedula", "CamaraComercio", "Formulario"
+  filename     String
+  originalName String
+  mimeType     String
+  size         Int
+  status       String   @default("cargado") // "pendiente", "cargado", "aprobado"
+  userId       String
+  metadata     String?
+  uploadedAt   DateTime @default(now())
+  
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}

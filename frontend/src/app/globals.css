@@ -1,0 +1,23 @@
+@import "tailwindcss";
+
+@theme {
+  --color-sagrilaft-primary: #8b0000; /* Dark Red */
+  --color-sagrilaft-secondary: #dc2626; /* Bright Red */
+  --color-sagrilaft-accent: #b91c1c;
+  --color-sagrilaft-success: #10b981;
+  --color-sagrilaft-error: #ef4444;
+  --color-sagrilaft-surface: #f8fafc;
+}
+
+body {
+  background-color: var(--color-sagrilaft-surface);
+  color: var(--color-sagrilaft-primary);
+  font-family: system-ui, -apple-system, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+::selection {
+  background-color: var(--color-sagrilaft-accent);
+  color: white;
+}
